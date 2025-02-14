@@ -1,8 +1,20 @@
-# React + Vite
+import React from 'react'
+import { Form } from 'informed';
+import useSWR from 'swr';
+import axiosInstance from '../../api/axiosInstance';
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+const fetcher = async (url) => {
+  const response = await axiosInstance.get(url);
+  return response.data;
+};
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+export default function Dashboard({}) {
+  const { data, error } = useSWR('/api/v1/employee?length=10&page=1&sort_order=asc&sort_by=name', fetcher);
+  console.log(data?.data?.rows,"test");
+  
+  return (
+    <>
+    {/* use react table and useswr */}
+    </>
+  )
+}

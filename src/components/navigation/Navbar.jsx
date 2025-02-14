@@ -1,31 +1,38 @@
 import React from 'react';
+import { Navbar, Nav, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
-export default function Navbar() {
-  const{auth ,globalLogout} = useAuth()
+export default function NavbarComponent() {
+  const { auth, globalLogout } = useAuth();
+
   return (
-    <nav className="bg-gray-800 shadow-lg p-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="text-white text-2xl font-bold">Brand</div>
-        <ul className="flex space-x-6 text-white">
-          <li>
-            <a href="#" className="hover:text-yellow-300">Home</a>
-          </li>
-          <li>
-            <a href="#" className="hover:text-yellow-300">About</a>
-          </li>
-          <li>
-            <a href="#" className="hover:text-yellow-300">Services</a>
-          </li>
-         {
-          auth && (
-            <li>
-            <a onClick={globalLogout} className="cursor-pointer text-red-500 bg-gray-700 p-4 rounded hover:text-red-300">Logout</a>
-          </li>
-          )
-         }
-        </ul>
+    <Navbar bg="dark" variant="dark" expand="lg" className="shadow-lg">
+      <div className="container">
+        <Navbar.Brand href="#">Brand</Navbar.Brand>
+        <Navbar.Toggle aria-controls="navbar-nav" />
+        <Navbar.Collapse id="navbar-nav">
+          <Nav className="ml-auto">
+            <Nav.Item>
+              <Link to="/test" className="nav-link text-white hover:text-yellow-300">
+                Home
+              </Link>
+            </Nav.Item>
+            
+            {auth && (
+              <Nav.Item>
+                <Button
+                  variant="danger"
+                  onClick={globalLogout}
+                  className="p-2"
+                >
+                  Logout
+                </Button>
+              </Nav.Item>
+            )}
+          </Nav>
+        </Navbar.Collapse>
       </div>
-    </nav>
+    </Navbar>
   );
 }

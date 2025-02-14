@@ -1,41 +1,47 @@
 import { useState } from "react";
+import { Form, Button } from "react-bootstrap";
 
 const LoginForm = ({ onLogin }) => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      onLogin(username, password);
-    };
-  
-    return (
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-3 bg-gray-800 p-6 rounded-lg shadow-lg"
-      >
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="p-2 rounded bg-gray-700 text-white focus:outline-none"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="p-2 rounded bg-gray-700 text-white focus:outline-none"
-        />
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-600 text-white py-2 rounded"
-        >
-          Login
-        </button>
-      </form>
-    );
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onLogin(username, password);
   };
 
-  export default LoginForm
+  return (
+    <Form
+      onSubmit={handleSubmit}
+      className="bg-dark p-4 rounded shadow-lg w-50 mx-auto"
+    >
+      <Form.Group controlId="formBasicUsername" className="mb-3">
+        <Form.Label className="text-white">Username</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Enter username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className="bg-secondary text-white"
+        />
+      </Form.Group>
+
+      <Form.Group controlId="formBasicPassword" className="mb-3">
+        <Form.Label className="text-white">Password</Form.Label>
+        <Form.Control
+          type="password"
+          placeholder="Enter password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="bg-secondary text-white"
+        />
+      </Form.Group>
+
+      <Button variant="primary" type="submit" className="w-100">
+        Login
+      </Button>
+    </Form>
+  );
+};
+
+export default LoginForm;
